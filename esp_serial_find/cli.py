@@ -1,12 +1,12 @@
 """Console script for esp_serial_find."""
 
-import logging
 import argparse
-import plistlib
+import logging
 import os
-from typing import List, Dict, Tuple
+import plistlib
+from typing import Dict, List, Tuple
 
-from esp_serial_find import find_subtree_paths, find_serial_and_path
+from .esp_serial_find import find_serial_and_path, find_subtree_paths
 
 logging.basicConfig(level=logging.ERROR)
 logger = logging.getLogger(__name__)

@@ -1,9 +1,10 @@
 """Main module."""
-import os
-import plistlib
 import argparse
 import logging
+import os
+import plistlib
 from typing import Dict, List, Tuple
+
 
 # traverse the plist and find the ESP32 IOUSBHostInterface
 def find_subtree_paths(data) -> List:

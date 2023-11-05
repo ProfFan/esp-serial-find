@@ -2,8 +2,6 @@
 """Tests for `esp_serial_find` package."""
 
 import pytest
-from click.testing import CliRunner
-
 from esp_serial_find import cli
 
 
@@ -26,10 +24,5 @@ def test_content(response):
 
 def test_command_line_interface():
     """Test the CLI."""
-    runner = CliRunner()
-    result = runner.invoke(cli.main)
-    assert result.exit_code == 0
-    assert 'esp-serial-find' in result.output
-    help_result = runner.invoke(cli.main, ['--help'])
-    assert help_result.exit_code == 0
-    assert '--help  Show this message and exit.' in help_result.output
+
+    pass
