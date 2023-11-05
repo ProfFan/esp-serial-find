@@ -1,7 +1,7 @@
 [tool]
 [tool.poetry]
 name = "esp-serial-find"
-version = "0.1.0"
+version = "0.1.1"
 homepage = "https://github.com/ProfFan/esp-serial-find"
 description = "Find the ESP32 serial port name with device serial number on macOS."
 authors = ["Fan Jiang <pypi@fanjiang.me>"]
