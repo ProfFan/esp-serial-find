@@ -2,4 +2,4 @@
 
 __author__ = """Fan Jiang"""
 __email__ = 'pypi@fanjiang.me'
-__version__ = '0.1.2'
+__version__ = '0.2.0'
