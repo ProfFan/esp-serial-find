@@ -43,7 +43,7 @@ def main():
     serial_and_path: List[Tuple[str, str]] = [
         (
             path[-2].get("USB Serial Number"),
-            path[-1].get("IORegistryEntryChildren")[0].get("IODialinDevice"),
+            path[-1].get("IORegistryEntryChildren")[0].get("IOCalloutDevice"),
         )
         for path in paths
     ]
