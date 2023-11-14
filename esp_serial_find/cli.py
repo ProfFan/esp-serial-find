@@ -28,6 +28,13 @@ def main():
         help="Print the path for the given serial number",
     )
 
+    argparser.add_argument(
+        "--prefer-tty",
+        "-t",
+        action="store_true",
+        help="Prefer the tty device over the cu device",
+    )
+
     args = argparser.parse_args()
 
     if args.verbose:
@@ -43,7 +50,7 @@ def main():
     serial_and_path: List[Tuple[str, str]] = [
         (
             path[-2].get("USB Serial Number"),
-            path[-1].get("IORegistryEntryChildren")[0].get("IOCalloutDevice"),
+            path[-1].get("IORegistryEntryChildren")[0].get("IODialinDevice" if args.prefer_tty else "IOCalloutDevice"),
         )
         for path in paths
     ]
