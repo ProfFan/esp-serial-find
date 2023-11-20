@@ -8,7 +8,7 @@
 
 
 
-Find the ESP32 serial port name with device serial number on macOS
+Find the ESP32 serial port name with device serial number on macOS and GNU/Linux.
 
 
 * Documentation: <https://ProfFan.github.io/esp-serial-find>
@@ -19,7 +19,7 @@ Find the ESP32 serial port name with device serial number on macOS
 
 ## Features
 
-* Find the ESP32 serial port name with device serial number on macOS
+* Find the ESP32 serial port name with device serial number on macOS and GNU/Linux.
 * `-s` option to print the path for the given serial number
 * `-v` option to print verbose output
 * Without any option: print all serial ports and their serial numbers
@@ -40,15 +40,15 @@ options:
 
 ```bash
 $ esp-serial-find
-70:ee:50:1c:1b:0c /dev/cu.usbserial-0001
-70:ee:50:1c:1b:0d /dev/cu.usbserial-0002
-70:ee:50:1c:1b:0e /dev/cu.usbserial-0003
+70:EE:50:1C:1B:0C /dev/cu.usbserial-0001
+70:EE:50:1C:1B:0D /dev/cu.usbserial-0002
+70:EE:50:1C:1B:0E /dev/cu.usbserial-0003
 ```
 
 ### Print the path for the given serial number
 
 ```bash
-$ esp-serial-find -s 70:ee:50:1c:1b:0c
+$ esp-serial-find -s 70:EE:50:1C:1B:0C
 /dev/cu.usbserial-0001
 ```
 
