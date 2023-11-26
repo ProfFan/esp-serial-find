@@ -5,32 +5,46 @@ import logging
 import os
 import sys
 import plistlib
+import multiprocessing
+import time
 from typing import Dict, List, Tuple
 
-from .esp_serial_find import find_serial_and_path, find_subtree_paths
+from esp_serial_find import find_serial_and_path, find_subtree_paths
 
 logging.basicConfig(level=logging.ERROR)
 logger = logging.getLogger(__name__)
 
+def find_one_device(base_path, device):
+    devices = []
+    try:
+        manufacturer = None
+        with open(os.path.join(base_path, device, "manufacturer"), "r") as f:
+            manufacturer = f.read().strip()
+
+        if manufacturer == "Espressif":
+            with open(os.path.join(base_path, device, "serial"), "r") as f:
+                serial_number = f.read().strip()
+            tty_path = find_tty_path(device)
+            if tty_path:
+                for tty in tty_path:
+                    devices.append((serial_number, tty))
+    except IOError:
+        pass  # Ignore files and directories that can't be read
+    return devices
+
+def find_one_device_worker(base_path, devices, device):
+    devices += find_one_device(base_path, device)
 
 def find_usb_devices(vendor_name):
-    devices = []
+    manager = multiprocessing.Manager()
+    devices = manager.list()
     base_path = "/sys/bus/usb/devices/"
-    for device in os.listdir(base_path):
-        try:
-            manufacturer = None
-            with open(os.path.join(base_path, device, "manufacturer"), "r") as f:
-                manufacturer = f.readline().strip()
-
-            if manufacturer == vendor_name:
-                with open(os.path.join(base_path, device, "serial"), "r") as f:
-                    serial_number = f.read().strip()
-                tty_path = find_tty_path(device)
-                if tty_path:
-                    for tty in tty_path:
-                        devices.append((serial_number, tty))
-        except IOError:
-            pass  # Ignore files and directories that can't be read
+    with multiprocessing.Pool(3) as pool:
+        for device in os.listdir(base_path):
+            pool.apply_async(find_one_device_worker, (base_path, devices, device))
+        pool.close()
+        time.sleep(0.1)
+        pool.terminate()
     return devices
 
 
