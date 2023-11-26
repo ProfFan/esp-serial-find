@@ -9,7 +9,7 @@ import multiprocessing
 import time
 from typing import Dict, List, Tuple
 
-from esp_serial_find import find_serial_and_path, find_subtree_paths
+from esp_serial_find.esp_serial_find import find_serial_and_path, find_subtree_paths
 
 logging.basicConfig(level=logging.ERROR)
 logger = logging.getLogger(__name__)
